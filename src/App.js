@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import useTitle from "./useTitle";
+import useFullscreen from "./useFullscreen";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const callback = (isFull) => {
+        console.log(isFull ? "we are full" : "we are small");
+    };
+    const { element, triggerFull, exitFull } = useFullscreen(callback);
+
+    return (
+        <div className="App" style={{ height: "1000vh" }}>
+        <div ref={element}>
+            <img
+            alt="cat"
+            src="http://image.dongascience.com/Photo/2019/09/d2468576cecf1313437de5a883bfa2ed.jpg"
+            />
+            <button onClick={exitFull}>Exit fullscreen</button>
+        </div>
+        <button onClick={triggerFull}>Make fullscreen</button>
+        </div>
+    );
+};
 
 export default App;
